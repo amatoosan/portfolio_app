@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       post '/signup', to: 'users#signup'
+      resources :users
 
       post '/login', to: 'sessions#login'
       delete '/logout', to: 'sessions#logout'
