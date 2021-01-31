@@ -22,7 +22,7 @@ services:
       TZ: Asia/Tokyo
       RAILS_ENV: development
     ports:
-      - 3000:3000
+      - 3001:3000
     depends_on:
       - db
   front:
@@ -33,7 +33,7 @@ services:
       - ./front:/usr/src/app
     command: sh -c "cd react-front && yarn start"
     ports:
-      - "8000:3000"
+      - "3000:3000"
 volumes:
   mysql-data:
     driver: local
