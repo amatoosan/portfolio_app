@@ -4,7 +4,6 @@ module V1
 
     def show
       @user = User.find(params[:id])
-
       render json: {
         user: @user
       }, status: :ok
