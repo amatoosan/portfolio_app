@@ -1,5 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useReducer, useState } from 'react';
 import axios from 'axios';
+
+// reducers
+import {
+  initialState as loginInitialState,
+  loginReducer,
+} from '../../reducers/login';
 
 export const Creates = () => {
    // useState()を用いて、ユーザーデータの初期値（空の文字列）を定義する。
@@ -12,6 +18,8 @@ export const Creates = () => {
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
+  const [state, dispatch] = useReducer(loginReducer, loginInitialState)
+
   const handleSubmit = (event) => {
     axios.post("http://localhost:3001/api/v1/signup",
       {
@@ -23,9 +31,14 @@ export const Creates = () => {
         }
       },
       { withCredentials: true }
-    ).then(response => {
+    ).then((response) => {
+      if (response.data.status === 'created') {
+        dispatch({
+            type: 'isLogin',
+            loginStatus: response
+        })
       console.log("registration res", response)
-    }).catch(error => {
+    }}).catch(error => {
       console.log("registration error", error)
     })
     event.preventDefault()
