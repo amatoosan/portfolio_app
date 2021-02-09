@@ -1,6 +1,8 @@
 module Api
 module V1
   class SessionsController < ApplicationController
+    before_action :current_user, only: [:logged_in?]
+
     def login
         @user = User.find_by(email: session_params[:email])
 
@@ -19,7 +21,7 @@ module V1
 
     def logged_in?
         if @current_user
-            render json: { logged_in: true, user: current_user }
+            render json: { logged_in: true, user: @current_user }
         else
             render json: { logged_in: false, message: 'ユーザーが存在しません' }
         end
