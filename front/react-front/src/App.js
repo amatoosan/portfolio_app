@@ -24,6 +24,7 @@ function App() {
 
   const [state, dispatch] = useReducer(loginReducer, loginInitialState)
   const [user, setUser] = useState({})
+  const [login, setLogin] = useState({})
 
   useEffect(() => {
     checkLoginStatus()
@@ -39,6 +40,7 @@ function App() {
             loginStatus: state,
           })
           setUser(response.data.user);
+          setLogin(response.data.logged_in);
         }
       console.log("ログイン状況", response)
     })
@@ -46,10 +48,10 @@ function App() {
       console.log("ログインエラー", error)
     })
   }
-
+  
   return (
     <Router>
-      <Heder />
+      <Heder isLoggedIn={login}/>
       <Switch>
         {/*user*/}
         <Route exact path="/users/:id"

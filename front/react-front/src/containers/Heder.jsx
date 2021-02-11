@@ -8,9 +8,6 @@ const HeaderWrapper = styled.div`
   height: 80px;
   width: 100%;
   background-color: #292929;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
 `;
 const MainLogoImage = styled.img`
   height: 60px;
@@ -19,33 +16,54 @@ const MainLogoImage = styled.img`
 `;
 const SiteIntroduction = styled.p`
   margin-top: 25px;
-  color: #fff;
+  color: white;
   float: left;
 `;
 const Button = styled.a`
-  width: 80px;
+  color: white;
+  width: 100px;
   text-align: center;
   background-color: rgb(78, 78, 78);
   float: right;
   line-height: 80px;
   margin-right: 2px;
   list-style: none;
-  display: table;
   text-decoration: none;
 `;
+const Guest = styled.p`
+  line-height: 24px;
+`;
 
-export const Heder = () => {
+export const Heder = (props) => {
+  if (props.isLoggedIn === true) {
   return (
     <Fragment>
       <HeaderWrapper>
         <MainLogoImage src={MainLogo} alt="main logo" />
         <SiteIntroduction>ようこそ！</SiteIntroduction>
-          <Button href="">ゲスト<br />ログイン</Button>
-          <Button href="/login">ログイン</Button>
-          <Button href="/signup">サインイン</Button>
+          <Button href="">ログアウト</Button>
+          <Button href="">投稿</Button>
+          <Button href="">プロフィール</Button>
           <Button href="">検索</Button>
           <Button href="/">ホーム</Button>
       </HeaderWrapper>
     </Fragment>
   )
+  } else {
+    return (
+      <Fragment>
+        <HeaderWrapper>
+          <MainLogoImage src={MainLogo} alt="main logo" />
+          <SiteIntroduction>ようこそ！</SiteIntroduction>
+            <Button href="">
+              <Guest>ゲスト<br />ログイン</Guest>
+            </Button>
+            <Button href="/login">ログイン</Button>
+            <Button href="/signup">サインイン</Button>
+            <Button href="">検索</Button>
+            <Button href="/">ホーム</Button>
+        </HeaderWrapper>
+      </Fragment>
+    )
+  }
 }
