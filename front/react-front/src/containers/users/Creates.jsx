@@ -1,5 +1,6 @@
 import React, { Fragment, useReducer, useState } from 'react';
 import axios from 'axios';
+import history from '../../history'
 
 // reducers
 import {
@@ -7,7 +8,7 @@ import {
   loginReducer,
 } from '../../reducers/login';
 
-export const Creates = () => {
+export const Creates = ({isLoggedIn}) => {
    // useState()を用いて、ユーザーデータの初期値（空の文字列）を定義する。
    // useState()フックは、[引数1, 引数2]のように配列で初期値を定義する。
    // 引数１には変数を定義し、引数２には関数を定義
@@ -37,6 +38,8 @@ export const Creates = () => {
             type: 'isLogin',
             loginStatus: response
         })
+        isLoggedIn()
+        history.push('/')
       console.log("registration res", response)
     }}).catch(error => {
       console.log("registration error", error)

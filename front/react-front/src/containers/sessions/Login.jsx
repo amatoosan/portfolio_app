@@ -1,17 +1,10 @@
-import React, { Fragment, useReducer, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import axios from 'axios';
+import history from '../../history'
 
-// reducers
-import {
-  initialState as loginInitialState,
-  loginReducer,
-} from '../../reducers/login';
-
-export const Login = () => {
+export const Login = ({isLoggedIn}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
-  const [state, dispatch] = useReducer(loginReducer, loginInitialState)
 
   const handleSubmit = (event) => {
     axios.post("http://localhost:3001/api/v1/login",
@@ -24,10 +17,9 @@ export const Login = () => {
       { withCredentials: true }
     ).then((response) => {
       if (response.data.logged_in === true) {
-        dispatch({
-          type: 'isLogin',
-        })
-      console.log("login response: ", response)
+        console.log("login response: ", response)
+        isLoggedIn()
+        history.push('/')
       }
     })
     .catch(error => {
@@ -38,7 +30,6 @@ export const Login = () => {
 
   return (
     <Fragment>
-      ログイン状態：{state.loginStatus}
       ログインページです
       <form onSubmit={handleSubmit}>
         <input
