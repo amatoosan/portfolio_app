@@ -34,36 +34,21 @@ const Guest = styled.p`
   line-height: 24px;
 `;
 
-export const Heder = (props) => {
-  if (props.isLoggedIn === true) {
+export const NotLoggedInHeder = () => {
+
   return (
     <Fragment>
       <HeaderWrapper>
         <MainLogoImage src={MainLogo} alt="main logo" />
-        <SiteIntroduction>ようこそ！</SiteIntroduction>
-          <Button href="">ログアウト</Button>
-          <Button href="">投稿</Button>
-          <Button href="">プロフィール</Button>
+          <SiteIntroduction>ようこそ！</SiteIntroduction>
+          <Button href="">
+            <Guest>ゲスト<br />ログイン</Guest>
+          </Button>
+          <Button href="/login">ログイン</Button>
+          <Button href="/signup">サインイン</Button>
           <Button href="">検索</Button>
           <Button href="/">ホーム</Button>
       </HeaderWrapper>
     </Fragment>
-  )
-  } else {
-    return (
-      <Fragment>
-        <HeaderWrapper>
-          <MainLogoImage src={MainLogo} alt="main logo" />
-          <SiteIntroduction>ようこそ！</SiteIntroduction>
-            <Button href="">
-              <Guest>ゲスト<br />ログイン</Guest>
-            </Button>
-            <Button href="/login">ログイン</Button>
-            <Button href="/signup">サインイン</Button>
-            <Button href="">検索</Button>
-            <Button href="/">ホーム</Button>
-        </HeaderWrapper>
-      </Fragment>
     )
-  }
 }
