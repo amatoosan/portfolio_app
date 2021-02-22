@@ -9,8 +9,8 @@ import axios from 'axios';
 
 import history from './history'
 
-import { LoggedInHeder } from './containers/LogeedInHeder.jsx';
-import { NotLoggedInHeder } from './containers/NotLogeedInHeder.jsx';
+import { LoggedInHeader } from './containers/LogeedInHeader';
+import { NotLoggedInHeader } from './containers/NotLogeedInHeader';
 
 // user components
 import { Shows } from './containers/users/Shows.jsx';
@@ -60,9 +60,9 @@ function App() {
   return (
     <Router history={history}>
       {loggedIn ? (
-        <LoggedInHeder isNotLoggedIn={isNotLoggedIn} />
+        <LoggedInHeader isNotLoggedIn={isNotLoggedIn} />
       ) : (
-        <NotLoggedInHeder />
+        <NotLoggedInHeader />
       )}
       <Switch>
         {/*user*/}
