@@ -18,6 +18,7 @@ export const Creates = ({isLoggedIn}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
+  const [image, setImage] = useState([])
 
   const [state, dispatch] = useReducer(loginReducer, loginInitialState)
 
@@ -28,7 +29,8 @@ export const Creates = ({isLoggedIn}) => {
           name: name,
           email: email,
           password: password,
-          password_confirmation: passwordConfirmation
+          password_confirmation: passwordConfirmation,
+          image: image
         }
       },
       { withCredentials: true }
@@ -45,6 +47,13 @@ export const Creates = ({isLoggedIn}) => {
       console.log("registration error", error)
     })
     event.preventDefault()
+  }
+
+  const handleChangeFile = (event) => {
+    const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL
+    const files = event.target.files
+    const image_url = createObjectURL(files[0])
+    setImage({image: image_url})
   }
 
   return (
@@ -79,7 +88,12 @@ export const Creates = ({isLoggedIn}) => {
           value={passwordConfirmation}
           onChange={event => setPasswordConfirmation(event.target.value)}
         />
-
+        <input
+          type="file"
+          name="image"
+          placeholder="画像"
+          onChange={(event) => {handleChangeFile(event)}}
+        />
         <button type="submit">登録</button>
       </form>
     </Fragment>
