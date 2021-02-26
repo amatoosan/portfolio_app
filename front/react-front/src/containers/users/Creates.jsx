@@ -2,6 +2,8 @@ import React, { Fragment, useReducer, useState } from 'react';
 import axios from 'axios';
 import history from '../../history'
 
+import DefaultImage from '../../images/images.png'
+
 // reducers
 import {
   initialState as loginInitialState,
@@ -18,7 +20,7 @@ export const Creates = ({isLoggedIn}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
-  const [image, setImage] = useState([])
+  const [image, setImage] = useState(null)
 
   const [state, dispatch] = useReducer(loginReducer, loginInitialState)
 
@@ -53,7 +55,7 @@ export const Creates = ({isLoggedIn}) => {
     const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL
     const files = event.target.files
     const image_url = createObjectURL(files[0])
-    setImage({image: image_url})
+    setImage(image_url)
   }
 
   return (
@@ -94,6 +96,11 @@ export const Creates = ({isLoggedIn}) => {
           placeholder="画像"
           onChange={(event) => {handleChangeFile(event)}}
         />
+        {image ? (
+          <img src={image}/>
+        ) : (
+          <img src={DefaultImage}/>
+        )}
         <button type="submit">登録</button>
       </form>
     </Fragment>
