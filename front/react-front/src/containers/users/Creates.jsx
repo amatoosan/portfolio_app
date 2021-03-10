@@ -1,6 +1,7 @@
 import React, { Fragment, useReducer, useState } from 'react';
 import axios from 'axios';
-import history from '../../history'
+// import history from '../../history'
+import { useHistory } from "react-router-dom";
 
 import DefaultImage from '../../images/images.png'
 
@@ -21,6 +22,8 @@ export const Creates = ({isLoggedIn}) => {
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
   const [image, setImage] = useState(null)
+
+  const history = useHistory();
 
   const [state, dispatch] = useReducer(loginReducer, loginInitialState)
 

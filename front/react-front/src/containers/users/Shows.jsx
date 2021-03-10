@@ -28,6 +28,7 @@ export const Shows = ({
       })
     })
   }, [])
+  
   return (
     <Fragment>
       ユーザーページです

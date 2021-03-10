@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
-import history from '../history';
+// import history from '../history';
 import {
   HeaderWrapper,
   MainLogoImage,
@@ -8,10 +8,16 @@ import {
   Button
 } from '../styles/Header'
 
+import { useHistory } from "react-router-dom";
+
+import { Shows } from './users/Shows';
+
 // images
 import MainLogo from '../images/icon.jpg';
 
 export const LoggedInHeader = ({isNotLoggedIn}) => {
+
+  const history = useHistory();
 
   const handleLogoutClick = (event) => {
     axios.delete("http://localhost:3001/api/v1/logout",
