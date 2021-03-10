@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import axios from 'axios';
-import history from '../../history'
+import { useHistory } from "react-router-dom";
 
 export const Login = ({isLoggedIn}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     axios.post("http://localhost:3001/api/v1/login",

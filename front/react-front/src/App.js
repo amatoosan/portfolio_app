@@ -1,26 +1,33 @@
 import React, { useEffect, useState }  from 'react';
 import './App.css';
 import {
-  Router,
+  BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
 import axios from 'axios';
 
-import history from './history'
+// import { useHistory } from "react-router-dom";
+// import history from './history'
 
 import { LoggedInHeader } from './containers/LogeedInHeader';
 import { NotLoggedInHeader } from './containers/NotLogeedInHeader';
 
 // user components
-import { Shows } from './containers/users/Shows.jsx';
-import { Creates } from './containers/users/Creates.jsx';
+import { Shows } from './containers/users/Shows';
+import { Creates } from './containers/users/Creates';
+import { UserUpdate } from './containers/users/Update'
+
+// session components
 import { Login } from './containers/sessions/Login';
+
 
 function App() {
 
   const [user, setUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false)
+
+  // const history = useHistory();
 
   const isLoggedIn = () => {
     setLoggedIn(true)
@@ -58,7 +65,7 @@ function App() {
   }
 
   return (
-    <Router history={history}>
+    <Router>
       {loggedIn ? (
         <LoggedInHeader isNotLoggedIn={isNotLoggedIn} />
       ) : (
@@ -66,7 +73,8 @@ function App() {
       )}
       <Switch>
         {/*user*/}
-        <Route exact path="/users/:id"
+        <Route
+          exact path="/users/:id"
           render={({ match }) =>
             <Shows match={match} />
           }
@@ -74,6 +82,12 @@ function App() {
         <Route exact path="/signup">
           <Creates isLoggedIn={isLoggedIn} />
         </Route>
+        <Route
+          exact path="/users/:id/update"
+          render={({ match }) =>
+            <UserUpdate match={match} />
+          }
+        />
         {/*session*/}
         <Route exact path="/login">
           <Login isLoggedIn={isLoggedIn} />
